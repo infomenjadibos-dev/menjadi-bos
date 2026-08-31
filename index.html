@@ -1151,6 +1151,8 @@
                 price: "Rp 99.000",
                 description: "Langkah demi langkah membangun startup dari ide awal, pitching ke investor, hingga meraih profitabilitas pertama.",
                 image: "images/kelas-barista-sanak-1.jpg", // Isi misal "images/produk1.jpg"
+                link: "https://menjadibos.myr.id/"
+        
             },
             {
                 id: 2,
@@ -1159,7 +1161,8 @@
                 originalPrice: "Rp 249.000",
                 price: "Rp 149.000",
                 description: "Pelajari strategi listing rumah impian, trik negosiasi dengan pembeli, hingga legalitas hukum akad properti agar cepat panen komisi.",
-                image: "images/kelas-makelar-properti.jpg", 
+                image: "images/kelas-makelar-properti.jpg",
+                link: "https://menjadibos.myr.id/"
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`
             },
             {
@@ -1170,6 +1173,7 @@
                 price: "Rp 149.000",
                 description: "Koleksi video mentahan estetik landscape Masjidil Haram dan Nabawi kualitas 4K. Siap pakai untuk kebutuhan konten dakwah, travel umrah, dan media sosial.",
                 image: "images/footage-haramain.jpg",
+                link: "https://menjadibos.myr.id/"
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>`
             },
             {
@@ -1190,6 +1194,7 @@
                 price: "Rp 279.000",
                 description: "Panduan seru dan aman menyeduh kopi kekinian dari rumah. Ajarkan anak mengenalkan racikan kopi gula arena yang gurih, creamy, dan layak jual.",
                 image: "images/kelas-barista-anak-2.jpg",
+                link: "https://menjadibos.myr.id/"
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`
             },
             {
@@ -1200,6 +1205,7 @@
                 price: "Rp 89.000",
                 description: "Kuasai teknik marinasi bumbu meresap sampai ke tulang, racikan tepung renyah tahan lama, dan teknik menggoreng deep fry standar industri.",
                 image: "images/kelas-ayam-krispi.jpg",
+                link: "https://menjadibos.myr.id/"    
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`
             }
         ];
@@ -1319,7 +1325,10 @@ setInterval(updateMidnightCountdown, 1000);
                             <span class="original-price">${product.originalPrice}</span>
                             <span class="price-tag">${product.price}</span>
                         </div>
-                        <button class="btn-accent" style="padding: 8px 16px; font-size: 0.85rem;" onclick="handleBuy('${product.title}', '${product.price}')">Beli Sekarang</button>
+                        <button class="btn-accent" style="padding: 8px 16px; font-size: 0.85rem;" 
+        onclick="handleBuy('${product.link}')">
+    Beli Sekarang
+</button>
                     </div>
                 </div>
             `).join('');
@@ -1366,13 +1375,13 @@ setInterval(updateMidnightCountdown, 1000);
             modalOverlay.classList.add("active");
         }
 
-        function handleBuy(productTitle, price) {
-            const encodedMsg = encodeURIComponent(`Halo Bos, saya ingin membeli materi: ${productTitle} (${price})`);
-            modalTitle.innerText = "Order Materi Bos";
-            modalText.innerHTML = `Anda memilih <strong>"${productTitle}"</strong> dengan harga promo <strong>${price}</strong>.`;
-            modalActionBtn.href = `https://wa.me/6281234567890?text=${encodedMsg}`;
-            modalOverlay.classList.add("active");
-        }
+        function handleBuy(targetUrl) {
+    if (targetUrl && targetUrl !== "") {
+        window.open(targetUrl, '_blank');
+    } else {
+        alert("Link pembelian belum tersedia untuk produk ini.");
+    }
+}
 
         function closeModal() {
             modalOverlay.classList.remove("active");
