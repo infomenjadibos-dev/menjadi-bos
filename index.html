@@ -1325,10 +1325,7 @@ setInterval(updateMidnightCountdown, 1000);
                             <span class="original-price">${product.originalPrice}</span>
                             <span class="price-tag">${product.price}</span>
                         </div>
-                        <button class="btn-accent" style="padding: 8px 16px; font-size: 0.85rem;" 
-        onclick="handleBuy('${product.link}')">
-    Beli Sekarang
-</button>
+                        <button class="btn-accent" style="padding: 8px 16px; font-size: 0.85rem;" onclick="handleBuy('${product.title}', '${product.price}')">Beli Sekarang</button>
                     </div>
                 </div>
             `).join('');
