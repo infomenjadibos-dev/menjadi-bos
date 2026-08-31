@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Produk Digital - Menjadi Bos</title>
+    <title>Katalog Produk Digital</title>
     <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="icon" type="image/png" href="images/logo-menjadibos.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,12 +19,15 @@
             --bg-color: #e0e5ec;
             --text-primary: #2d3748;
             --text-secondary: #64748b;
+            --text-muted: #94a3b8;
             --accent-primary: #4361ee;
             --accent-hover: #3a56d4;
             --accent-soft: #e0e7ff;
             --badge-bg: #dbeafe;
             --badge-text: #1e40af;
             --star-color: #f59e0b;
+            --wa-green: #25d366;
+            --wa-green-hover: #20ba5a;
 
             /* Neumorphic Light Shadow Calculations */
             --shadow-dark: #a3b1c6;
@@ -50,6 +54,7 @@
             --bg-color: #1e242d;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
+            --text-muted: #64748b;
             --accent-primary: #5c7cfa;
             --accent-hover: #748ffc;
             --accent-soft: #242e42;
@@ -66,7 +71,7 @@
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
         }
 
         body {
@@ -141,6 +146,10 @@
             box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
             transition: all 0.25s ease;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-accent:hover {
@@ -152,6 +161,38 @@
         .btn-accent:active {
             transform: translateY(0);
             box-shadow: inset 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        /* Tombol WhatsApp Hijau */
+        .btn-whatsapp {
+            background: var(--wa-green);
+            color: #ffffff;
+            border: none;
+            outline: none;
+            padding: 14px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 5px 5px 14px rgba(37, 211, 102, 0.35), -4px -4px 10px var(--shadow-light);
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--wa-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 18px rgba(37, 211, 102, 0.45), -6px -6px 14px var(--shadow-light);
+        }
+
+        .btn-whatsapp:active {
+            transform: translateY(0);
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.25);
         }
 
         .input-soft {
@@ -172,19 +213,25 @@
         }
 
         /* ==========================================================================
-           3. HEADER & NAVIGASI
+           3. HEADER & NAVIGASI (DENGAN EFEK SCROLL HALUS & ANTI-CROP)
            ========================================================================== */
         header {
-            padding: 24px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(224, 229, 236, 0.85);
-            backdrop-filter: blur(10px);
+            padding: 20px 0 16px 0;
+            background: linear-gradient(to bottom, var(--bg-color) 70%, rgba(224, 229, 236, 0.85) 90%, transparent 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: padding 0.3s ease, background 0.3s ease;
         }
 
         [data-theme="dark"] header {
-            background: rgba(30, 36, 45, 0.85);
+            background: linear-gradient(to bottom, var(--bg-color) 70%, rgba(30, 36, 45, 0.85) 90%, transparent 100%);
+        }
+
+        header.scrolled {
+            padding: 12px 0 14px 0;
         }
 
         .nav-wrapper {
@@ -195,6 +242,11 @@
             border-radius: var(--radius-md);
             box-shadow: var(--soft-shadow-flat);
             background: var(--bg-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header.scrolled .nav-wrapper {
+            box-shadow: var(--soft-shadow-hover);
         }
 
         .logo {
@@ -237,7 +289,7 @@
            4. HERO SECTION
            ========================================================================== */
         .hero {
-            padding: 60px 0 40px 0;
+            padding: 50px 0 40px 0;
             text-align: center;
         }
 
@@ -319,7 +371,7 @@
         }
 
         /* ==========================================================================
-           6. GRID PRODUK & KARTU (CARD)
+           6. GRID PRODUK & KARTU (DENGAN HARGA CORET)
            ========================================================================== */
         .product-grid {
             display: grid;
@@ -402,6 +454,20 @@
             justify-content: space-between;
             padding-top: 16px;
             border-top: 1px solid rgba(163, 177, 198, 0.2);
+        }
+
+        /* Container Harga Coret & Harga Promo */
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .original-price {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 600;
         }
 
         .price-tag {
@@ -520,13 +586,108 @@
         }
 
         /* ==========================================================================
-           8. MODAL NOTIFIKASI
+           8. SECTION: AYO JADI MITRA BOS (PARTNERSHIP SOFT UI)
+           ========================================================================== */
+        .partner-section {
+            padding: 40px 0 20px 0;
+        }
+
+        .partner-card {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--soft-shadow-hover);
+            padding: 50px 36px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            border-radius: var(--radius-full);
+            box-shadow: var(--soft-shadow-inset);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+        }
+
+        .partner-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+
+        .partner-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 32px auto;
+            line-height: 1.7;
+        }
+
+        .partner-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 850px;
+            margin: 0 auto 36px auto;
+        }
+
+        .feature-item-soft {
+            background: var(--bg-color);
+            padding: 18px 16px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--soft-shadow-inset);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-icon-wrapper {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            box-shadow: var(--soft-shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+        }
+
+        .feature-item-soft h5 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .feature-item-soft p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-join-mitra {
+            padding: 16px 36px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ==========================================================================
+           9. MODAL NOTIFIKASI & POP-UP WHATSAPP
            ========================================================================== */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -543,12 +704,13 @@
 
         .modal-card {
             background: var(--bg-color);
-            padding: 32px;
+            padding: 36px 32px;
             border-radius: var(--radius-lg);
             box-shadow: var(--soft-shadow-hover);
             max-width: 420px;
             width: 90%;
             text-align: center;
+            position: relative;
             transform: scale(0.9);
             transition: transform 0.3s ease;
         }
@@ -557,20 +719,58 @@
             transform: scale(1);
         }
 
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: none;
+            box-shadow: var(--soft-shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--text-primary);
+            box-shadow: var(--soft-shadow-flat);
+        }
+
+        .modal-icon-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            box-shadow: var(--soft-shadow-sm);
+            margin: 0 auto 18px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--wa-green);
+        }
+
         .modal-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
         }
 
         .modal-text {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 24px;
+            font-size: 0.98rem;
+            margin-bottom: 28px;
         }
 
         /* ==========================================================================
-           9. FOOTER & MEDIA SOSIAL
+           10. FOOTER & MEDIA SOSIAL
            ========================================================================== */
         footer {
             margin-top: 60px;
@@ -619,16 +819,20 @@
         }
 
         /* ==========================================================================
-           10. RESPONSIVE MEDIA QUERIES
+           11. RESPONSIVE MEDIA QUERIES
            ========================================================================== */
         @media (max-width: 992px) {
             .product-grid, .testimonial-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .partner-features {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
             .hero-title {
                 font-size: 2.2rem;
             }
-            .section-title {
+            .section-title, .partner-title {
                 font-size: 1.8rem;
             }
         }
@@ -636,6 +840,9 @@
         @media (max-width: 640px) {
             .product-grid, .testimonial-grid {
                 grid-template-columns: 1fr;
+            }
+            .partner-card {
+                padding: 36px 20px;
             }
             .controls-bar {
                 flex-direction: column;
@@ -665,7 +872,7 @@
     <!-- ==========================================================================
        HEADER & NAVIGASI
        ========================================================================== -->
-    <header>
+    <header id="mainHeader">
         <div class="container">
             <nav class="nav-wrapper">
                 <a href="#" class="logo">
@@ -809,6 +1016,55 @@
                 </div>
             </div>
         </section>
+
+        <!-- ==========================================================================
+           SECTION: AYO JADI MITRA BOS (PARTNERSHIP & BAGI HASIL)
+           ========================================================================== -->
+        <section class="partner-section">
+            <div class="partner-card">
+                <span class="partner-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Peluang Kemitraan Eksklusif
+                </span>
+                <h2 class="partner-title">Ayo Jadi Mitra Bos & Raih Cuan Maksimal!</h2>
+                <p class="partner-desc">
+                    Bergabunglah bersama ratusan partner sukses lainnya dalam ekosistem <strong>Mitra Bos</strong>. Dapatkan sistem bagi hasil transparan dengan potensi penghasilan tanpa batas hanya dengan membagikan materi dan produk digital berkualitas tinggi kepada audiens Anda.
+                </p>
+
+                <!-- 3 Fitur Unggulan Kemitraan -->
+                <div class="partner-features">
+                    <div class="feature-item-soft">
+                        <div class="feature-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        <h5>Bagi Hasil Hingga 50%</h5>
+                        <p>Komisi melimpah untuk setiap produk digital yang terjual.</p>
+                    </div>
+
+                    <div class="feature-item-soft">
+                        <div class="feature-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                        </div>
+                        <h5>Marketing Kit Lengkap</h5>
+                        <p>Disediakan banner, copywriting, dan konten promosi siap sebar.</p>
+                    </div>
+
+                    <div class="feature-item-soft">
+                        <div class="feature-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <h5>Pencairan Cepat & Mudah</h5>
+                        <p>Penarikan hasil komisi otomatis langsung ke rekening Anda.</p>
+                    </div>
+                </div>
+
+                <!-- Tombol CTA Join Mitra Bos -->
+                <button class="btn-accent btn-join-mitra" onclick="handleJoinMitra()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Join Mitra Bos
+                </button>
+            </div>
+        </section>
     </main>
 
     <!-- ==========================================================================
@@ -855,13 +1111,34 @@
     </footer>
 
     <!-- ==========================================================================
-       MODAL DIALOG (SOFT UI INTERACTION)
+       MODAL DIALOG (SOFT UI INTERACTION - HUBUNGI BOS & MITRA BOS)
        ========================================================================== -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-card">
-            <h3 class="modal-title" id="modalTitle">Informasi</h3>
-            <p class="modal-text" id="modalText">Detail instruksi akan muncul di sini.</p>
-            <button class="btn-accent" style="width: 100%;" onclick="closeModal()">Tutup</button>
+            <!-- Tombol X Close -->
+            <button class="modal-close-btn" onclick="closeModal()" aria-label="Tutup Modal">&times;</button>
+            
+            <div class="modal-icon-badge">
+                <!-- Icon WhatsApp -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1 1.49-.07 1.47-.61 1.68-1.2.21-.6.21-1.11.15-1.2-.06-.1-.23-.17-.48-.29z"/>
+                </svg>
+            </div>
+            
+            <h3 class="modal-title" id="modalTitle">Hubungi Bos</h3>
+            <p class="modal-text" id="modalText">Konsultasi atau kemitraan bisnis?</p>
+            
+            <!-- Tombol Hijau WhatsApp -->
+            <a href="https://wa.me/6281234567890?text=Halo%20Bos,%20saya%20tertarik%20konsultasi%20dan%20kemitraan%20bisnis." 
+               target="_blank" 
+               rel="noopener" 
+               class="btn-whatsapp" 
+               id="modalActionBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                </svg>
+                <span>Hubungi Sekarang</span>
+            </a>
         </div>
     </div>
 
@@ -869,28 +1146,31 @@
        JAVASCRIPT LOGIC
        ========================================================================== -->
     <script>
-        // Data Katalog Produk Digital (Mock Data)
+        // Data Katalog Produk Digital (Dengan Harga Asli Coret & Harga Promo)
         const products = [
             {
                 id: 1,
                 title: "Masterclass Startup Founder 2026",
                 category: "E-Course",
+                originalPrice: "Rp 699.000",
                 price: "Rp 349.000",
                 description: "Langkah demi langkah membangun startup dari ide awal, pitching ke investor, hingga meraih profitabilitas pertama.",
-                icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4l3 12h14l3-12-6 7-4-5-4 5-6-7z"/><circle cx="12" cy="19" r="1.5" fill="currentColor"/></svg>`
+                image: "images/kelasgularen-ecourse.png"
             },
             {
                 id: 2,
-                title: "Blueprint Menjadi Bos Tanpa Modal Besar",
+                title: "Kelas Barista Anak, Bikin Kopi Gula Aren",
                 category: "E-Book",
-                price: "Rp 129.000",
+                originalPrice: "Rp 249.000",
+                price: "Rp 99.000",
                 description: "Buku panduan mendirikan bisnis agency dan layanan digital independen dengan sistem kerja remote.",
-                icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`
+                image: "images/kelasgularen-ecourse.png"
             },
             {
                 id: 3,
                 title: "3D Executive & Boss Icon Pack",
                 category: "Assets",
+                originalPrice: "Rp 299.000",
                 price: "Rp 149.000",
                 description: "Kumpulan 150+ ikon 3D bertema bisnis, startup, dan eksekutif bergaya Soft UI beresolusi tinggi.",
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>`
@@ -899,6 +1179,7 @@
                 id: 4,
                 title: "Startup Pitch Deck & Financial Model",
                 category: "Assets",
+                originalPrice: "Rp 399.000",
                 price: "Rp 199.000",
                 description: "Template siap pakai untuk presentasi investor dan kalkulasi keuangan startup otomatis di Notion & Excel.",
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>`
@@ -907,6 +1188,7 @@
                 id: 5,
                 title: "Kepemimpinan & Growth Hacking 101",
                 category: "E-Course",
+                originalPrice: "Rp 499.000",
                 price: "Rp 279.000",
                 description: "Kuasai cara merekrut tim impian, mendelegasikan tugas seperti bos sejati, dan menaikkan skala operasional.",
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`
@@ -915,6 +1197,7 @@
                 id: 6,
                 title: "E-Book Financial Freedom Founder",
                 category: "E-Book",
+                originalPrice: "Rp 179.000",
                 price: "Rp 89.000",
                 description: "Panduan memisahkan keuangan pribadi dan perusahaan serta investasi reksadana/saham untuk pebisnis.",
                 icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`
@@ -933,10 +1216,21 @@
         const modalOverlay = document.getElementById("modalOverlay");
         const modalTitle = document.getElementById("modalTitle");
         const modalText = document.getElementById("modalText");
+        const modalActionBtn = document.getElementById("modalActionBtn");
         const btnContactNav = document.getElementById("btnContactNav");
         const themeToggleBtn = document.getElementById("themeToggleBtn");
         const themeIconSun = document.getElementById("themeIconSun");
         const themeIconMoon = document.getElementById("themeIconMoon");
+        const mainHeader = document.getElementById("mainHeader");
+
+        // Transisi Header Saat Gulir / Scroll (Anti-Crop)
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 20) {
+                mainHeader.classList.add("scrolled");
+            } else {
+                mainHeader.classList.remove("scrolled");
+            }
+        });
 
         // Toggle Dark / Light Mode
         function toggleTheme() {
@@ -954,7 +1248,7 @@
 
         themeToggleBtn.addEventListener("click", toggleTheme);
 
-        // Render Kartu Produk
+        // Render Kartu Produk dengan Harga Coret
         function renderProducts() {
             const filteredProducts = products.filter(product => {
                 const matchesCategory = activeCategory === "Semua" || product.category === activeCategory;
@@ -977,16 +1271,22 @@
             productGrid.innerHTML = filteredProducts.map(product => `
                 <div class="product-card">
                     <div class="card-img-wrapper">
-                        <div class="card-img-placeholder">
-                            ${product.icon}
-                        </div>
+    ${product.image 
+        ? `<img src="${product.image}" alt="${product.title}" style="width:100%; height:100%; object-fit:cover;">`
+        : `<div class="card-img-placeholder">${product.icon}</div>`
+    }
+    <span class="card-badge">${product.category}</span>
+</div>
                         <span class="card-badge">${product.category}</span>
                     </div>
                     <h3 class="product-title">${product.title}</h3>
                     <p class="product-desc">${product.description}</p>
                     <div class="card-footer">
-                        <span class="price-tag">${product.price}</span>
-                        <button class="btn-accent" style="padding: 8px 16px; font-size: 0.85rem;" onclick="handleBuy('${product.title}')">Beli Sekarang</button>
+                        <div class="price-container">
+                            <span class="original-price">${product.originalPrice}</span>
+                            <span class="price-tag">${product.price}</span>
+                        </div>
+                        <button class="btn-accent" style="padding: 8px 16px; font-size: 0.85rem;" onclick="handleBuy('${product.title}', '${product.price}')">Beli Sekarang</button>
                     </div>
                 </div>
             `).join('');
@@ -1017,18 +1317,29 @@
             }
         }
 
-        // Modal Handlers
-        function handleBuy(productTitle) {
-            showModal("Beli Produk", `Selamat! Anda selangkah lebih dekat untuk menjadi bos. Anda memilih paket <strong>"${productTitle}"</strong>. Tim kami akan segera memproses akses Anda.`);
-        }
-
+        // Trigger Modal Hubungi Bos (WhatsApp)
         btnContactNav.addEventListener("click", () => {
-            showModal("Hubungi Menjadi Bos", "Butuh konsultasi atau kemitraan bisnis? Hubungi tim kami via WhatsApp di <strong>+62 812-3456-7890</strong> atau email <strong>halo@menjadibos.com</strong>.");
+            modalTitle.innerText = "Hubungi Bos";
+            modalText.innerText = "Konsultasi atau kemitraan bisnis?";
+            modalActionBtn.href = "https://wa.me/6281234567890?text=Halo%20Bos,%20saya%20ingin%20konsultasi%20atau%20kemitraan%20bisnis.";
+            modalOverlay.classList.add("active");
         });
 
-        function showModal(title, text) {
-            modalTitle.innerText = title;
-            modalText.innerHTML = text;
+        // Trigger Modal Join Mitra Bos (Program Bagi Hasil)
+        function handleJoinMitra() {
+            const encodedMitra = encodeURIComponent("Halo Bos, saya tertarik bergabung menjadi Mitra Bos (Program Kemitraan & Bagi Hasil). Mohon info pendaftarannya.");
+            modalTitle.innerText = "Join Mitra Bos";
+            modalText.innerHTML = "Dapatkan komisi bagi hasil hingga <strong>50%</strong> dari setiap penjualan produk digital. Tim kami siap memandu Anda!";
+            modalActionBtn.href = `https://wa.me/6281234567890?text=${encodedMitra}`;
+            modalOverlay.classList.add("active");
+        }
+
+        // Handling Beli Produk (Langsung Direct ke WhatsApp Order)
+        function handleBuy(productTitle, price) {
+            const encodedMsg = encodeURIComponent(`Halo Bos, saya ingin membeli materi: ${productTitle} (${price})`);
+            modalTitle.innerText = "Order Materi Bos";
+            modalText.innerHTML = `Anda memilih <strong>"${productTitle}"</strong> dengan harga promo <strong>${price}</strong>.`;
+            modalActionBtn.href = `https://wa.me/6281234567890?text=${encodedMsg}`;
             modalOverlay.classList.add("active");
         }
 
