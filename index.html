@@ -1223,26 +1223,35 @@
         const themeIconMoon = document.getElementById("themeIconMoon");
         const mainHeader = document.getElementById("mainHeader");
 
-        // Digital Countdown Timer (5 Jam dari sekarang)
-        let totalSeconds = (5 * 3600); // 5 Jam dalam detik
 
-        function updateCountdown() {
-            if (totalSeconds <= 0) {
-                totalSeconds = (5 * 3600); // Repeat loop jika habis
-            } else {
-                totalSeconds--;
-            }
+        // Digital Countdown Timer (Hitung Mundur ke Jam 00.00 Tengah Malam Hari Ini)
+function updateMidnightCountdown() {
+    const now = new Date();
+    
+    // Set waktu target ke jam 24:00 (00:00 hari berikutnya)
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
 
-            const hrs = Math.floor(totalSeconds / 3600);
-            const mins = Math.floor((totalSeconds % 3600) / 60);
-            const secs = totalSeconds % 60;
+    // Hitung selisih waktu dalam milidetik
+    const diff = midnight - now;
 
-            document.getElementById("hours").innerText = String(hrs).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(mins).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(secs).padStart(2, '0');
-        }
+    if (diff > 0) {
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
 
-        setInterval(updateCountdown, 1000);
+        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    } else {
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+    }
+}
+
+// Jalankan timer setiap 1 detik
+setInterval(updateMidnightCountdown, 1000);
 
         // Header Scroll Transition
         window.addEventListener("scroll", () => {
@@ -1375,9 +1384,9 @@
 
         // Init
         document.addEventListener("DOMContentLoaded", () => {
-            renderProducts();
-            updateCountdown();
-        });
+    renderProducts();
+    updateMidnightCountdown();
+});
     </script>
 </body>
 </html>
