@@ -907,6 +907,55 @@
                 display: none;
             }
         }
+        /* Logo Menyatu Satu Kotak Soft UI (Mobile Friendly) */
+        .logo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-color);
+            box-shadow: var(--soft-shadow-sm);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.25s ease;
+        }
+
+        .logo-btn:hover {
+            box-shadow: var(--soft-shadow-flat);
+            transform: translateY(-2px);
+        }
+
+        .logo-btn:active {
+            box-shadow: var(--soft-shadow-inset);
+            transform: translateY(0);
+        }
+
+        .logo-img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 640px) {
+            .nav-wrapper {
+                padding: 8px 12px;
+            }
+            .logo-btn {
+                padding: 6px 12px;
+            }
+            .logo-text {
+                font-size: 0.95rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -914,11 +963,9 @@
     <header id="mainHeader">
         <div class="container">
             <nav class="nav-wrapper">
-                <a href="#" class="logo">
-    <div class="logo-icon">
-        <img src="images/Logo-MenjadiBos.png" alt="Logo Menjadi Bos" style="width: 24px; height: 24px; object-fit: contain;">
-    </div>
-    <span>Menjadi Bos</span>
+                <a href="#" class="logo-btn">
+    <img src="images/Logo-MenjadiBos.png" alt="Logo Menjadi Bos" class="logo-img">
+    <span class="logo-text">Menjadi Bos</span>
 </a>
                 
                 <div class="nav-actions">
